@@ -1,0 +1,12 @@
+@font-face {
+    font-family: FuturaPTBook;
+    src: url(fonts/FuturaPTBook.otf);
+  }
+@font-face {
+  font-family: FuturaPTLight;
+  src: url(fonts/FuturaPTBook.otf);
+}
+@font-face {
+  font-family: SortsMillGoudy;
+  src: url(fonts/SortsMillGoudy-Regular.ttf);
+}
