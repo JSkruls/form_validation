@@ -1,12 +1,21 @@
 @font-face {
-    font-family: FuturaPTBook;
-    src: url(fonts/FuturaPTBook.otf);
-  }
+  font-family: FuturaPTBook;
+  src: url(fonts/FuturaPTBook.otf);
+}
+
 @font-face {
   font-family: FuturaPTLight;
   src: url(fonts/FuturaPTBook.otf);
 }
+
 @font-face {
   font-family: SortsMillGoudy;
   src: url(fonts/SortsMillGoudy-Regular.ttf);
 }
+
+html {
+  min-height: 100%;
+  background: linear-gradient(0deg, rgba(141, 192, 116, .3), rgba(141, 192, 116, .3)), url(images/background_image.jpeg);
+  background-size: cover;
+}
+
