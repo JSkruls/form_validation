@@ -13,6 +13,30 @@
   src: url(fonts/SortsMillGoudy-Regular.ttf);
 }
 
+:root {
+  --main-card-bg: rgba(38, 68, 42, 1);
+  --action-btn-bg: rgba(113, 183, 46, 1);
+  --back-btn-bg: rgba(141, 192, 116, .5);
+  --input-bg: rgba(50, 91, 56, 1);
+  --invalid-input-bg: rgba(183, 47, 46, .1);
+  --input-border: rgba(68, 130, 69, 1);
+  --placeholder-text: rgba(179, 179, 179, 1);
+  --valid-input-border: rgba(113, 183, 46, 1);
+  --invalid-input-border: rgba(255, 29, 37, 1);
+  --check-mark-icon: rgba(113, 184, 69, 1);
+  --error-icon: rgba(238, 40, 49, 1);
+  --alternate-login: rgba(204, 204, 204, 1);
+  --password-weak: rgba(200, 25, 25, 1);
+  --password-average: rgba(255, 172, 29, 1);
+  --password-medium: rgba(231, 229, 21, 1);
+  --password-strong: rgba(113, 183, 46, 1);
+  --password-gray: rgba(230,, 230, 230, 1);
+  --icon-light-green: rgba(141, 192, 116, 1);
+  --icon-dark-green: rgba(31, 52, 21, 1);
+  --icon-light-red: rgba(192, 129, 116, 1);
+  --icon-dark-red: rgba(52, 26, 21, 1);
+}
+
 html {
   min-height: 100%;
   background: linear-gradient(0deg, rgba(141, 192, 116, .5), rgba(141, 192, 116, .5)), url(images/background_image.jpeg);
@@ -29,7 +53,7 @@ body {
 main {
   width: clamp(1000px, 75vw, 1250px);
   height: 80vh;
-  background: rgba(38, 68, 42, 1);
+  background: var(--main-card-bg);
   border-radius: 18px;
   filter: drop-shadow(0px 3px 12px rgba(0, 0, 0, .6));
 }
