@@ -18,6 +18,29 @@
         <div class="input-wrap">
           <h1>Create an account</h1>
           <p class="log-in">Already have an account? <a href="#">Log in</a></p>
+          <form action="example.com/path" method="post">
+            <div class="input-row">
+              <label for="first_name" hidden>Name:</label>
+              <input type="text" id="first_name" name="first_name" placeholder="Name">
+
+              <label for="surname" hidden>Surname:</label>
+              <input type="text" id="surname" name="surname" placeholder="Surname">
+            </div>
+            
+            <div class="input-row">
+              <label for="email" hidden>Email:</label>
+              <input type="email" id="email" name="email" placeholder="Email">
+              <label for="phone" hidden>Phone:</label>
+              <input type="tel" id="phone" name="phone" placeholder="+371 0000000">
+            </div>
+            
+            <div class="input-row">
+              <label for="password" hidden>Password:</label>
+              <input type="password" id="password" name="password" placeholder="Enter password">
+              <label for="password" hidden>Repeat password:</label>
+              <input type="password" id="password" name="password" placeholder="Confirm password">
+            </div>
+          </form>
         </div>
     </main>
   </body>
