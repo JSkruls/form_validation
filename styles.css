@@ -100,7 +100,7 @@ main {
 #back-btn {
   background: rgba(141, 192, 116, .4);
   color: rgba(255, 255, 255, 1);
-  border-radius: 15px;
+  border-radius: 20px;
   padding: 8px 0 8px 15px;
   border-style: none;
   position: absolute;
@@ -223,6 +223,14 @@ svg#name {
 p.terms {
   font-size: calc(.2rem + .8vw);
   color: rgba(179, 179, 179, 1);
+}
+
+#submit {
+  background-color: var(--action-btn-bg);
+  border: none;
+  border-radius: 5px;
+  padding: 8px 0;
+  color: rgb(255, 255, 255);
 }
 
 
