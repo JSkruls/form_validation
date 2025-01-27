@@ -70,7 +70,7 @@ main {
 .form_wrap {
   font-family: "FuturaPTLight", sans-serif;
   width: 100%;
-  padding: 0 0 0 3rem;
+  margin: 0 2rem 0 3rem;
 }
 
 #hero-img {
@@ -123,13 +123,12 @@ a img {
   margin: .8rem 0 calc(1.3rem + 1vw) 0;
 }
 
-.log-in a {
+a {
   text-decoration: underline;
   color: rgba(113, 183, 46, 1);
 }
 
 form {
-  margin-right: 2rem;
   display: flex;
   flex-direction: column;
   row-gap: 1.5rem;
@@ -142,6 +141,12 @@ form {
   column-gap: 1.5rem;
 }
 
+.checkbox {
+  justify-content: start;
+  column-gap: 0.5rem;
+  margin-top: -1rem;
+}
+
 .input_wrap > input {
   height: var(--input-height);
   background-color: rgba(50, 91, 56, 1);
@@ -151,6 +156,7 @@ form {
   padding-left: 30px;
   flex-grow: 1;
   font-weight: 700;
+  width: 100%;
 }
 
 input::placeholder {
@@ -159,9 +165,35 @@ input::placeholder {
 
 input:focus {
   outline: 1px solid rgba(113, 183, 46, 1);
-  -webkit-box-shadow: inset 0px 0px 5px 1px rgba(0,0,0,0.25);
-  -moz-box-shadow: inset 0px 0px 5px 1px rgba(0,0,0,0.25);
-  box-shadow: inset 0px 0px 5px 1px rgba(0,0,0,0.25);
+}
+
+input#terms {
+  -webkit-appearance: none; 
+  appearance: none; /* Removes default styles yet allows pseudo elements */
+  background-color: rgba(255, 255, 255, 1); /* For iOS < 15 to remove gradient background */
+  margin: 0; /* Not removed via appearance */
+  display: grid;
+  place-content: center; /* Centers the check mark*/
+  border-radius: 2px;
+  width: 15px;
+  height: 15px;
+}
+
+input#terms::before {
+  content: '';
+  width: 0.65em;
+  height: 0.65em;
+  transform: scale(0);
+  transform-origin: bottom left; /* Leave animation */
+  transition: 300ms transform ease-in-out;
+  box-shadow: inset .5em .5em rgba(0, 0, 0, 1);
+  clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+}
+
+input#terms:checked::before {
+  transform: scale(1);
+  transform-origin: bottom left; /* Enter animation */
+  clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
 }
 
 .input_wrap {
@@ -187,6 +219,12 @@ svg#name {
   height: 14px;
   width: 14px;
 }
+
+p.terms {
+  font-size: calc(.2rem + .8vw);
+  color: rgba(179, 179, 179, 1);
+}
+
 
 
 
