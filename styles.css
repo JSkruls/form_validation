@@ -98,7 +98,7 @@ main {
 }
 
 #back-btn {
-  background: rgba(141, 192, 116, .4);
+  background: var(--back-btn-bg);
   color: rgba(255, 255, 255, 1);
   border-radius: 20px;
   padding: 8px 0 8px 15px;
@@ -125,13 +125,14 @@ a img {
 
 a {
   text-decoration: underline;
-  color: rgba(113, 183, 46, 1);
+  color: var(--action-btn-bg);
 }
 
 form {
   display: flex;
   flex-direction: column;
   row-gap: 1.5rem;
+  margin-bottom: 2rem;
 }
 
 .input_row {
@@ -149,7 +150,7 @@ form {
 
 .input_wrap > input {
   height: var(--input-height);
-  background-color: rgba(50, 91, 56, 1);
+  background-color: var(--input-bg);
   border-style: none;
   border-radius: 5px;
   color: rgba(255, 255, 255, 1);
@@ -165,6 +166,9 @@ input::placeholder {
 
 input:focus {
   outline: 1px solid rgba(113, 183, 46, 1);
+  -webkit-box-shadow: inset 0px 0px 10px 1px rgba(0,0,0,0.25);
+  -moz-box-shadow: inset 0px 0px 10px 1px rgba(0,0,0,0.25);
+  box-shadow: inset 0px 0px 10px 1px rgba(0,0,0,0.25);
 }
 
 input#terms {
@@ -234,6 +238,51 @@ p.terms {
 }
 
 
+hr { 
+  border: .1px solid rgba(204, 204, 204, 0.7);
+  width: 100%;
+  margin: 0;
+}
 
+ h2 {
+  font-size: 1rem;
+  color: var(--alternate-login);
+  background-color: var(--main-card-bg);
+  width: fit-content;
+  padding: 0 .5rem;
+  position: absolute;
+  margin: -12px auto 0 auto;
+  left: 0;
+  right: 0;
+} 
 
+.alt_login_wrap {
+  position: relative;
+  background-color: rgba(255, 255, 0, 0.301);
+}
 
+.login_btn_wrap {
+  display: flex;
+  justify-content: space-between;
+  column-gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.login_btn_wrap > button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  column-gap: 5px;
+  background-color: var(--input-bg);
+  outline: 1px solid var(--input-border);
+  border-radius: 5px;
+  border-style: none;
+  flex-grow: 1;
+  width: 100%;
+  color: white;
+  height: 34.4px;
+}
+
+button > img {
+  height: 22px;
+}
