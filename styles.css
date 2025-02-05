@@ -63,7 +63,6 @@ main {
 }
 .hero_wrap {
   height: 80vh;
-  width: fit-content;
   position: relative;
 }
 
@@ -101,12 +100,15 @@ main {
   background: var(--back-btn-bg);
   color: rgba(255, 255, 255, 1);
   border-radius: 20px;
-  padding: 8px 0 8px 15px;
   border-style: none;
-  position: absolute;
+  padding: 8px 0 8px 15px;
+  width: fit-content;
   font-weight: 100;
-  bottom: 5%;
-  left: calc(32.5% + 0.8vw);
+  position: absolute;
+  margin: 0 auto 5% auto;
+  right: 0;
+  left: 0;
+  bottom: 0;
 }
  
 #back-btn a {
@@ -286,3 +288,17 @@ hr {
 button > img {
   height: 22px;
 }
+
+input:valid {
+  outline: 1px solid rgba(113, 183, 46, 1);
+  background:url(images/valid.svg) no-repeat right;
+  background-size: 6%;
+  background-position: 95% 50%;
+  background-color: var(--input-bg);
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:focus {
+    /* removes/postpones browser autofill styling */
+    transition: background-color 0s 600000s, color 0s 600000s !important;
+  }
