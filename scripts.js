@@ -5,6 +5,8 @@ const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/; //email validation patter
 const phoneRegex = /^(\+)?(\d{3})?\d{8}$/; //phone validation pattern
 const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\W])[A-Za-z\d\W]{6,15}$/; //password validation pattern
 const checkBox = document.querySelector('#terms'); // input checkbox
+let firstPassword = document.querySelector('input[name="password"]'); //probably have to make them global variables
+let secondPassword = document.querySelector('input[name="confirm"]');
 
 checkBox.addEventListener('click', (e) => { //when valid/checked display no validation message
   checkBox.setCustomValidity('');
@@ -14,7 +16,7 @@ inputs.forEach((input) => {
   input.addEventListener('input', (e) => { //on every input character entry 
     switch(input.name) { //[f] turn into a function; re-write it shorter (with object?)
       case 'first_name': //[check input type against its respective validation pattern]
-        if(!nameRegex.test(input.value) || input.value.length > 20) { //on validation failure
+        if(!nameRegex.test(input.value)) { //on validation failure
           input.classList.remove('valid'); //remove pre-existing valid styling
           input.classList.add('invalid'); //and apply invalid styling
         } 
@@ -26,7 +28,7 @@ inputs.forEach((input) => {
         break;
 
       case 'surname': 
-        if(!nameRegex.test(input.value) || input.value.length > 20) {  //add max length through html
+        if(!nameRegex.test(input.value)) {  
           input.classList.remove('valid');
           input.classList.add('invalid');
         } 
@@ -38,7 +40,7 @@ inputs.forEach((input) => {
         break;
       
       case 'email': 
-        if(!emailRegex.test(input.value) || input.value.length > 30) { //add max length through html
+        if(!emailRegex.test(input.value)) { 
           input.classList.remove('valid');
           input.classList.add('invalid');
         } 
@@ -61,15 +63,38 @@ inputs.forEach((input) => {
         }
         break;
 
-      case 'password':
+      case 'password': 
         if(!passwordRegex.test(input.value)) { 
+          input.classList.remove('valid');  
+          input.classList.add('invalid');
+        } 
+        else {
+          input.classList.remove('invalid');
+          input.classList.add('valid');
+          input.setCustomValidity('');
+          if(firstPassword.value !== secondPassword.value) {
+            secondPassword.classList.remove('valid');
+            secondPassword.classList.add('invalid');
+            secondPassword.setCustomValidity(`Doesn't match the password`);
+         }
+        }
+        break;
+
+        case 'confirm': 
+          
+          console.log(`${firstPassword.value} : ${secondPassword.value}`);
+        if(!passwordRegex.test(input.value) && firstPassword.value !== secondPassword.value ||
+        passwordRegex.test(input.value) &&  firstPassword.value !== secondPassword.value) { 
           input.classList.remove('valid');
           input.classList.add('invalid');
         } 
         else { 
+          if(firstPassword.value === secondPassword.value) {
           input.classList.remove('invalid');
           input.classList.add('valid');
-          input.setCustomValidity(''); 
+          input.setCustomValidity('');
+          console.log('else');
+          } 
         }
         break;
         
@@ -87,7 +112,7 @@ inputs.forEach((input) => {
   });
 });
 
-submitBtn.addEventListener('click', (e) => { //on 'create account' button click
+submitBtn.addEventListener('click', (e) => { //[on 'create account' button click]
   inputs.forEach((input) => { 
     let children = input.parentElement.children[0].childNodes; //[f] turn into a function; avoid children[0] and target by element ('svg')-> refactoring screenshot
     children.forEach(child => { //loops through NodeList: <circle>; <line>; <path> etc.
