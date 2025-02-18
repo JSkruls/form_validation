@@ -5,11 +5,20 @@ const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/; //email validation patter
 const phoneRegex = /^(\+)?(\d{3})?\d{8}$/; //phone validation pattern
 const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\W])[A-Za-z\d\W]{6,15}$/; //password validation pattern
 const checkBox = document.querySelector('#terms'); // input checkbox
-const passOne = document.querySelector('input[name="password"]'); //probably have to make them global variables
+const passOne = document.querySelector('input[name="password"]');
 const passTwo = document.querySelector('input[name="confirm"]');
+const progress = document.querySelector('.progress_bar_wrap');
 
 checkBox.addEventListener('click', (e) => { //when valid/checked display no validation message
   checkBox.setCustomValidity('');
+});
+
+passOne.addEventListener('focus', (e) => {
+  progress.style.visibility = 'visible';
+});
+
+passOne.addEventListener('blur', (e) => {
+  progress.style.visibility = 'hidden';
 });
 
 inputs.forEach((input) => {
