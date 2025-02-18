@@ -5,8 +5,8 @@ const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/; //email validation patter
 const phoneRegex = /^(\+)?(\d{3})?\d{8}$/; //phone validation pattern
 const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\W])[A-Za-z\d\W]{6,15}$/; //password validation pattern
 const checkBox = document.querySelector('#terms'); // input checkbox
-let firstPassword = document.querySelector('input[name="password"]'); //probably have to make them global variables
-let secondPassword = document.querySelector('input[name="confirm"]');
+const passOne = document.querySelector('input[name="password"]'); //probably have to make them global variables
+const passTwo = document.querySelector('input[name="confirm"]');
 
 checkBox.addEventListener('click', (e) => { //when valid/checked display no validation message
   checkBox.setCustomValidity('');
@@ -72,29 +72,25 @@ inputs.forEach((input) => {
           input.classList.remove('invalid');
           input.classList.add('valid');
           input.setCustomValidity('');
-          if(firstPassword.value !== secondPassword.value) {
-            secondPassword.classList.remove('valid');
-            secondPassword.classList.add('invalid');
-            secondPassword.setCustomValidity(`Doesn't match the password`);
-         }
+          if(passOne.value !== passTwo.value) {
+            passTwo.classList.remove('valid');
+            passTwo.classList.add('invalid');
+            passTwo.setCustomValidity(`Doesn't match the password`);
+          }
         }
         break;
 
-        case 'confirm': 
-          
-          console.log(`${firstPassword.value} : ${secondPassword.value}`);
-        if(!passwordRegex.test(input.value) && firstPassword.value !== secondPassword.value ||
-        passwordRegex.test(input.value) &&  firstPassword.value !== secondPassword.value) { 
+        case 'confirm':   
+        if(!passwordRegex.test(input.value) && passOne.value !== passTwo.value || 
+          passwordRegex.test(input.value) &&  passOne.value !== passTwo.value) { //makes invalid when both match, but you keep writing
           input.classList.remove('valid');
           input.classList.add('invalid');
         } 
         else { 
-          if(firstPassword.value === secondPassword.value) {
           input.classList.remove('invalid');
           input.classList.add('valid');
           input.setCustomValidity('');
-          console.log('else');
-          } 
+           
         }
         break;
         
@@ -112,7 +108,7 @@ inputs.forEach((input) => {
   });
 });
 
-submitBtn.addEventListener('click', (e) => { //[on 'create account' button click]
+submitBtn.addEventListener('click', (e) => { //on 'create account' button click]
   inputs.forEach((input) => { 
     let children = input.parentElement.children[0].childNodes; //[f] turn into a function; avoid children[0] and target by element ('svg')-> refactoring screenshot
     children.forEach(child => { //loops through NodeList: <circle>; <line>; <path> etc.
@@ -131,6 +127,7 @@ submitBtn.addEventListener('click', (e) => { //[on 'create account' button click
         }
       }
     });
+    
     if(!input.classList.contains('valid') || input.value === '') { //check if no input is left empty or invalid
       switch(input.name) { //[r] put inside submitBtn click event; [f] turn into a function!
         case 'first_name': 
@@ -161,8 +158,6 @@ submitBtn.addEventListener('click', (e) => { //[on 'create account' button click
     }; 
   });
 });
-
-
 
 inputs.forEach((input) => { //loops through <input>s attaching 'input' event listeners
   input.addEventListener('input', (e) => { //on every input
