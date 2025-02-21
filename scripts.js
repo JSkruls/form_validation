@@ -1,38 +1,94 @@
-const inputs = document.querySelectorAll('input'); //select all <input> elements storing them in a NodeList
-const submitBtn = document.querySelector('#submit'); 
+const inputs = document.querySelectorAll('input'); //node list of inputs
+const submitBtn = document.querySelector('#submit'); //create account button
 const nameRegex = /^[a-zA-Z]+$/; //name and surname validation pattern
 const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/; //email validation pattern
 const phoneRegex = /^(\+)?(\d{3})?\d{8}$/; //phone validation pattern
 const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\W])[A-Za-z\d\W]{6,15}$/; //password validation pattern
-const checkBox = document.querySelector('#terms'); // input checkbox
-const passOne = document.querySelector('input[name="password"]');
-const passTwo = document.querySelector('input[name="confirm"]');
-const progress = document.querySelector('.progress_bar_wrap');
+const checkBox = document.querySelector('#terms'); // input check-box
+const passOne = document.querySelector('input[name="password"]'); //password input
+const passTwo = document.querySelector('input[name="confirm"]'); //password confirmation input
+const progress = document.querySelector('.progress_bar_wrap'); //password strength wrapper
 
 checkBox.addEventListener('click', (e) => { //when valid/checked display no validation message
   checkBox.setCustomValidity('');
 });
 
-passOne.addEventListener('focus', (e) => {
+passOne.addEventListener('focus', (e) => { //show progress bars only on input focus
   progress.style.visibility = 'visible';
 });
 
-passOne.addEventListener('blur', (e) => {
+passOne.addEventListener('blur', (e) => { //hide progress bars
   progress.style.visibility = 'hidden';
 });
+
+function passwordStrength(password) { //colors progress bars based on input char
+  let firstBar = document.querySelector('.one');
+  let secondBar = document.querySelector('.two');
+  let thirdBar = document.querySelector('.three');
+  let fourthBar = document.querySelector('.four');
+  let regexArray = new Array(); //stores regex patterns
+  let colorCode = 0; //passed regex pattern counter
+
+  
+  if(!passOne.value) { //on empty  input first progress bar turns gray
+    progress.children[0].style.background = 'rgba(147, 147, 147, 1)';
+  }
+
+  //populates array with password regex parts
+  regexArray.push('[a-z]');
+  regexArray.push('[A-Z]');
+  regexArray.push('[0-9]');
+  regexArray.push('[!@#$%^&*()]');
+
+  regexArray.forEach(pattern => { //each array string is turned to regex and tested for validity
+    if(new RegExp(pattern).test(password)) {
+        colorCode++; //on each pass color code is increased 0 to 4
+      }
+  });
+
+  switch(colorCode) {
+    case 1: 
+      firstBar.style.background = 'rgba(200, 25, 25, 1)'; 
+      secondBar.style.background = 'rgba(147, 147, 147, 1)';
+      thirdBar.style.background = 'rgba(147, 147, 147, 1)';
+      fourthBar.style.background = 'rgba(147, 147, 147, 1)';
+      break;
+
+    case 2: 
+      firstBar.style.background = 'rgba(255, 172, 29, 1)';
+      secondBar.style.background = 'rgba(255, 172, 29, 1)';
+      thirdBar.style.background = 'rgba(147, 147, 147, 1)';
+      fourthBar.style.background = 'rgba(147, 147, 147, 1)';
+      break;
+
+    case 3: 
+      firstBar.style.background = 'rgba(231, 229, 21, 1)';
+      secondBar.style.background = 'rgba(231, 229, 21, 1)';
+      thirdBar.style.background = 'rgba(231, 229, 21, 1)';
+      fourthBar.style.background = 'rgba(147, 147, 147, 1)';
+      break;
+
+    case 4: 
+      firstBar.style.background = 'rgba(113, 183, 46, 1)';
+      secondBar.style.background = 'rgba(113, 183, 46, 1)';
+      thirdBar.style.background = 'rgba(113, 183, 46, 1)';
+      fourthBar.style.background = 'rgba(113, 183, 46, 1)';
+      break;
+  }
+}
 
 inputs.forEach((input) => {
   input.addEventListener('input', (e) => { //on every input character entry 
     switch(input.name) { //[f] turn into a function; re-write it shorter (with object?)
-      case 'first_name': //[check input type against its respective validation pattern]
+      case 'first_name': //check input type against its respective validation pattern]
         if(!nameRegex.test(input.value)) { //on validation failure
-          input.classList.remove('valid'); //remove pre-existing valid styling
+          input.classList.remove('valid'); //remove pre-existing valid styling if present
           input.classList.add('invalid'); //and apply invalid styling
         } 
         else { //if validation is passed
-          input.classList.remove('invalid'); //remove invalid styling when error is corrected
+          input.classList.remove('invalid'); //remove invalid styling if error is corrected
           input.classList.add('valid'); //and apply valid styling
-          input.setCustomValidity(''); 
+          input.setCustomValidity('');  //remove validity error message
         } 
         break;
 
@@ -81,17 +137,21 @@ inputs.forEach((input) => {
           input.classList.remove('invalid');
           input.classList.add('valid');
           input.setCustomValidity('');
-          if(passOne.value !== passTwo.value) {
+          if(passOne.value !== passTwo.value) { //style password confirmation input invalid of they don't match
             passTwo.classList.remove('valid');
             passTwo.classList.add('invalid');
-            passTwo.setCustomValidity(`Doesn't match the password`);
+            passTwo.setCustomValidity(`Doesn't match the password`); //apply password miss match validation message
+          }
+          else { //remove invalid styling from confirmation input when first password is changed and then reverted back
+            passTwo.classList.add('valid');
+            passTwo.classList.remove('invalid');
           }
         }
         break;
 
         case 'confirm':   
-        if(!passwordRegex.test(input.value) && passOne.value !== passTwo.value || 
-          passwordRegex.test(input.value) &&  passOne.value !== passTwo.value) { //makes invalid when both match, but you keep writing
+        if(!passwordRegex.test(input.value) && passOne.value !== passTwo.value || //style invalid if can't pass validity and miss match
+          passwordRegex.test(input.value) &&  passOne.value !== passTwo.value) { //style invalid if validity is passed and both match, but extra chars are added
           input.classList.remove('valid');
           input.classList.add('invalid');
         } 
@@ -117,7 +177,7 @@ inputs.forEach((input) => {
   });
 });
 
-submitBtn.addEventListener('click', (e) => { //on 'create account' button click]
+submitBtn.addEventListener('click', (e) => { //on 'create account' button click
   inputs.forEach((input) => { 
     let children = input.parentElement.children[0].childNodes; //[f] turn into a function; avoid children[0] and target by element ('svg')-> refactoring screenshot
     children.forEach(child => { //loops through NodeList: <circle>; <line>; <path> etc.
@@ -137,7 +197,7 @@ submitBtn.addEventListener('click', (e) => { //on 'create account' button click]
       }
     });
     
-    if(!input.classList.contains('valid') || input.value === '') { //check if no input is left empty or invalid
+    if(!input.classList.contains('valid') || input.value === '') { //assigns validation message to empty or invalid inputs
       switch(input.name) { //[r] put inside submitBtn click event; [f] turn into a function!
         case 'first_name': 
           input.setCustomValidity('Fill in your name');
@@ -163,7 +223,7 @@ submitBtn.addEventListener('click', (e) => { //on 'create account' button click]
             input.setCustomValidity('You must agree to our terms of service');
             break;
       }
-      input.classList.add('invalid'); //turn unfilled inputs invalid
+      input.classList.add('invalid'); //on submit click styles all empty inputs invalid
     }; 
   });
 });
@@ -172,8 +232,8 @@ inputs.forEach((input) => { //loops through <input>s attaching 'input' event lis
   input.addEventListener('input', (e) => { //on every input
     if(input.classList.contains('valid')) { //checks if <input> field is valid against regex pattern
      let children = input.parentElement.children[0].childNodes; //[f] turn into a function; avoid children[0] and target by element ('svg')-> refactoring screenshot
-/*f1*/  children.forEach(child => { //loops through NodeList: <circle>; <line>; <path> etc.
-        if (child.nodeType !== Node.TEXT_NODE) { //if child isn't a text node and contains fill or stroke color, changes it to opposite
+        children.forEach(child => { //loops through NodeList: <circle>; <line>; <path> etc.
+        if (child.nodeType !== Node.TEXT_NODE) { //if child isn't a text node and contains fill or stroke color change input icon to green
           if(child.getAttribute('style').includes('fill: rgb(52, 26, 21);')) { //if fill is dark red
             child.style.fill = 'rgb(31, 52, 21)'; //change to dark green
           }
@@ -185,13 +245,13 @@ inputs.forEach((input) => { //loops through <input>s attaching 'input' event lis
           }
           if(child.getAttribute('style').includes('stroke: rgb(192, 129, 116);')) { //if stroke is light red 
             child.style.stroke = 'rgb(141, 192, 116)'; //change to light green
-/* */     }
+          }
         }
       });
     } else if (!input.classList.contains('valid')) { //checks if <input> field is valid against regex pattern
         let children = input.parentElement.children[0].childNodes; //[f] turn into a function; avoid children[0] and target by element ('svg')-> refactoring screenshot
-/*f2*/    children.forEach(child => { //loops through NodeList: <circle>; <line>; <path> etc.
-          if (child.nodeType !== Node.TEXT_NODE) { //if child isn't a text node and contains fill or stroke color, changes it to opposite
+          children.forEach(child => { //loops through NodeList: <circle>; <line>; <path> etc.
+          if (child.nodeType !== Node.TEXT_NODE) { //if child isn't a text node and contains fill or stroke color change input color to red
             if(child.getAttribute('style').includes('fill: rgb(31, 52, 21);')) { //if has dark green fill
                 child.style.fill = 'rgb(52, 26, 21)'; // change to dark red
             }
@@ -203,7 +263,7 @@ inputs.forEach((input) => { //loops through <input>s attaching 'input' event lis
             }
             if(child.getAttribute('style').includes('stroke: rgb(141, 192, 116);')) { // if has light-green fill
                 child.style.stroke = 'rgb(192, 129, 116)'; //change to light red
-/* */       }
+            }
           }
         });
     }
