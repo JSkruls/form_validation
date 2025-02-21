@@ -191,6 +191,13 @@ input#terms {
   width: 15px;
   height: 15px;
 }
+button {
+  cursor: pointer;
+}
+button:active {
+  outline: 1px solid rgba(113, 183, 46, 1)!important;
+  box-shadow: inset 0px 0px 10px 1px rgba(0,0,0,0.25);
+}
 
 input#terms::before {
   content: '';
