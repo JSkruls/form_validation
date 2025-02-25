@@ -30,9 +30,12 @@ function passwordStrength(password) { //colors progress bars based on input char
   let colorCode = 0; //passed regex pattern counter
 
   
-  if(!passOne.value) { //on empty  input first progress bar turns gray
-    progress.children[0].style.background = 'rgba(147, 147, 147, 1)';
+  if(!passOne.value) { //on empty input progress bars turn gray
+    Array.from(progress.children).forEach((bar) => {
+      bar.style.background = 'rgba(147, 147, 147, 1)';
+    });
   }
+  
 
   //populates array with password regex parts
   regexArray.push('[a-z]');
