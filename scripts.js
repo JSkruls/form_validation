@@ -21,6 +21,7 @@ passOne.addEventListener('blur', (e) => { //hide progress bars
   progress.style.visibility = 'hidden';
 });
 
+
 function passwordStrength(password) { //colors progress bars based on input char
   let firstBar = document.querySelector('.one');
   let secondBar = document.querySelector('.two');
@@ -131,38 +132,71 @@ inputs.forEach((input) => {
         }
         break;
 
-      case 'password': 
+      case 'password':
         if(!passwordRegex.test(input.value)) { 
           input.classList.remove('valid');  
           input.classList.add('invalid');
         } 
         else {
+          passTwo.removeAttribute('disabled');
           input.classList.remove('invalid');
           input.classList.add('valid');
           input.setCustomValidity('');
-          if(passOne.value !== passTwo.value) { //style password confirmation input invalid of they don't match
+          if(passOne.value !== passTwo.value) { //style password confirmation input invalid if they don't match
             passTwo.classList.remove('valid');
             passTwo.classList.add('invalid');
             passTwo.setCustomValidity(`Doesn't match the password`); //apply password miss match validation message
+            let children = passTwo.parentElement.children[0].childNodes; 
+            children.forEach(child => { //upon re-entering a different password change confirm icon green to red
+              if (child.nodeType !== Node.TEXT_NODE) { 
+                if(child.getAttribute('style').includes('fill: rgb(31, 52, 21);')) { 
+                    child.style.fill = 'rgb(52, 26, 21)'; 
+                }
+                if(child.getAttribute('style').includes('fill: rgb(141, 192, 116);')) { 
+                    child.style.fill = 'rgb(192, 129, 116)'; 
+                }
+                if(child.getAttribute('style').includes('stroke: rgb(31, 52, 21);')) { 
+                    child.style.stroke = 'rgb(52, 26, 21)'; 
+                }
+                if(child.getAttribute('style').includes('stroke: rgb(141, 192, 116);')) { 
+                    child.style.stroke = 'rgb(192, 129, 116)'; 
+                }
+              }
+            });
           }
-          else { //remove invalid styling from confirmation input when first password is changed and then reverted back
+          else if (passOne.value === passTwo.value && passTwo.value !== '') { //remove invalid styling from confirmation input when first password is changed and then reverted back
             passTwo.classList.add('valid');
             passTwo.classList.remove('invalid');
+            let children = passTwo.parentElement.children[0].childNodes; 
+            children.forEach(child => { //entering confirm before pass styles icon red, adding same password would't color would remain red, not it turns green
+              if (child.nodeType !== Node.TEXT_NODE) { 
+                if(child.getAttribute('style').includes('fill: rgb(52, 26, 21);')) { // rgb(31, 52, 21);
+                    child.style.fill = 'rgb(31, 52, 21)'; 
+                }
+                if(child.getAttribute('style').includes('fill: rgb(192, 129, 116);')) { //rgb(141, 192, 116)
+                    child.style.fill = 'rgb(141, 192, 116)'; 
+                }
+                if(child.getAttribute('style').includes('stroke: rgb(52, 26, 21);')) { 
+                    child.style.stroke = 'rgb(31, 52, 21)'; 
+                }
+                if(child.getAttribute('style').includes('stroke: rgb(192, 129, 116);')) { 
+                    child.style.stroke = 'rgb(141, 192, 116)'; 
+                }
+              }
+            });
           }
         }
         break;
 
         case 'confirm':   
-        if(!passwordRegex.test(input.value) && passOne.value !== passTwo.value || //style invalid if can't pass validity and miss match
-          passwordRegex.test(input.value) &&  passOne.value !== passTwo.value) { //style invalid if validity is passed and both match, but extra chars are added
+        if(passOne.value !== passTwo.value) { //style invalid if validity and both match, but extra chars are added
           input.classList.remove('valid');
           input.classList.add('invalid');
         } 
-        else { 
+        else if (passTwo.value) { //prevent confirmation input to be valid when both passwords are empty
           input.classList.remove('invalid');
           input.classList.add('valid');
           input.setCustomValidity('');
-           
         }
         break;
         
