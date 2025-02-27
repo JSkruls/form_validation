@@ -4,6 +4,7 @@
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
       <link rel="stylesheet" href="styles.css">
       <script src="scripts.js" defer></script>
       <title>Form Validation</title>
@@ -74,7 +75,7 @@
                 <input type="tel" id="phone" name="phone" placeholder="+371 0000000" autocomplete="off" required>
               </div>
             </div>
-            <div class="input_row">
+            <div class="input_row" style="position: relative;">
               <label for="password" hidden>Password:</label>
               <div class="input_wrap">
                 <?xml version="1.0" encoding="UTF-8"?>
@@ -92,6 +93,7 @@
                   <hr class="bar four" style="border-bottom-right-radius: 5px;" aria-hidden="true">
                 </div>
               </div>
+              <i class="fa fa-eye-slash" id="togglePassword"></i>
               <label for="password" hidden>Repeat password:</label>
               <div class="input_wrap">
                 <?xml version="1.0" encoding="UTF-8"?>
@@ -104,7 +106,6 @@
                 <input type="password" id="password" name="confirm" placeholder="Confirm password" autocomplete="off" required>
               </div>
             </div>
-
             <div class="input_row checkbox">
               <input type="checkbox" id="terms" name="terms" required>
               <p class="terms">I agree to the <a href="#">Terms &amp Conditions</a></p>

@@ -8,6 +8,7 @@ const checkBox = document.querySelector('#terms'); // input check-box
 const passOne = document.querySelector('input[name="password"]'); //password input
 const passTwo = document.querySelector('input[name="confirm"]'); //password confirmation input
 const progress = document.querySelector('.progress_bar_wrap'); //password strength wrapper
+const eyeIcon = document.getElementById('togglePassword');
 
 checkBox.addEventListener('click', (e) => { //when valid/checked display no validation message
   checkBox.setCustomValidity('');
@@ -19,6 +20,21 @@ passOne.addEventListener('focus', (e) => { //show progress bars only on input fo
 
 passOne.addEventListener('blur', (e) => { //hide progress bars
   progress.style.visibility = 'hidden';
+});
+
+eyeIcon.addEventListener('click', (e) => {
+  if(passOne.type === 'password') {
+     passOne.type = 'text';
+     passTwo.type = 'text';
+     eyeIcon.classList.remove('fa-eye-slash');
+     eyeIcon.classList.add('fa-eye');
+  }
+  else if (passOne.type === 'text') {
+    passOne.type = 'password';
+    passTwo.type = 'password';
+    eyeIcon.classList.remove('fa-eye');
+    eyeIcon.classList.add('fa-eye-slash');
+  }
 });
 
 
