@@ -368,13 +368,13 @@ hr.four {
 .fa { /* styles both visible and hidden password icons */
   position: absolute;
   bottom: calc(50% - 5px);
-  left: calc(49.5% - 5px);
+  left: calc(49.7% - 5px);
   font-size: 10px;
   color: var(--placeholder-text);
 }
 .fa-eye::before { /* visible password icon */
   content:'\f06e';
-  position: absolute; /* otherwise open eye is slightly to the left */
+  position: absolute; /* otherwise icon is slightly to the left */
   top: -10px;
   right: -12px;
   
