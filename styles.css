@@ -377,9 +377,18 @@ hr.four {
   position: absolute; /* otherwise icon is slightly to the left */
   top: -10px;
   right: -12px;
-  
 }
 
 .fa-eye-slash::before {
   content:'\f070'; /* hidden password icon */
+}
+
+.hint {
+  font-size: 0.7rem;
+  color: var(--invalid-input-border);
+  display: inline;
+  position: absolute;
+  top: 80%;
+  left: .5%;
+  visibility: hidden;
 }

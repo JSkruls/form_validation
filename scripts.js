@@ -9,6 +9,7 @@ const passOne = document.querySelector('input[name="password"]'); //password inp
 const passTwo = document.querySelector('input[name="confirm"]'); //password confirmation input
 const progress = document.querySelector('.progress_bar_wrap'); //password strength wrapper
 const eyeIcon = document.getElementById('togglePassword');
+const hint = document.querySelector('.hint');
 
 checkBox.addEventListener('click', (e) => { //when valid/checked display no validation message
   checkBox.setCustomValidity('');
@@ -20,6 +21,15 @@ passOne.addEventListener('focus', (e) => { //show progress bars only on input fo
 
 passOne.addEventListener('blur', (e) => { //hide progress bars
   progress.style.visibility = 'hidden';
+  if(!passOne.classList.contains('invalid')) {
+    hint.style.visibility = 'hidden'; // hide password hint on blur if it's not invalid
+  }
+});
+
+passOne.addEventListener('input', (e) => { // display password hint if it's invalid
+  if(passOne.classList.contains('invalid')) {
+    hint.style.visibility = 'visible';
+  }
 });
 
 eyeIcon.addEventListener('click', (e) => {
