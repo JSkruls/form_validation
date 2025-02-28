@@ -384,11 +384,11 @@ hr.four {
 }
 
 .hint {
-  font-size: 0.7rem;
+  font-size: calc(0.7rem + .1vw);
   color: var(--invalid-input-border);
   display: inline;
   position: absolute;
-  top: 80%;
+  top: calc(75% + .1vh);
   left: .5%;
   visibility: hidden;
 }
