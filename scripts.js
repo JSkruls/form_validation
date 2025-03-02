@@ -48,6 +48,27 @@ eyeIcon.addEventListener('click', (e) => {
 });
 
 
+
+function styleIconRed(input) {
+  let children = input.parentElement.children[0].childNodes; 
+  children.forEach(child => { //upon re-entering a different password change confirm icon green to red
+    if (child.nodeType !== Node.TEXT_NODE) { 
+      if(child.getAttribute('style').includes('fill: rgb(31, 52, 21);')) { 
+          child.style.fill = 'rgb(52, 26, 21)'; 
+      }
+      if(child.getAttribute('style').includes('fill: rgb(141, 192, 116);')) { 
+          child.style.fill = 'rgb(192, 129, 116)'; 
+      }
+      if(child.getAttribute('style').includes('stroke: rgb(31, 52, 21);')) { 
+          child.style.stroke = 'rgb(52, 26, 21)'; 
+      }
+      if(child.getAttribute('style').includes('stroke: rgb(141, 192, 116);')) { 
+          child.style.stroke = 'rgb(192, 129, 116)'; 
+      }
+    }
+  });
+}
+
 function passwordStrength(password) { //colors progress bars based on input char
   let firstBar = document.querySelector('.one');
   let secondBar = document.querySelector('.two');
@@ -56,13 +77,11 @@ function passwordStrength(password) { //colors progress bars based on input char
   let regexArray = new Array(); //stores regex patterns
   let colorCode = 0; //passed regex pattern counter
 
-  
   if(!passOne.value) { //on empty input progress bars turn gray
     Array.from(progress.children).forEach((bar) => {
       bar.style.background = 'rgba(147, 147, 147, 1)';
     });
   }
-  
 
   //populates array with password regex parts
   regexArray.push('[a-z]');
@@ -172,29 +191,13 @@ inputs.forEach((input) => {
             passTwo.classList.remove('valid');
             passTwo.classList.add('invalid');
             passTwo.setCustomValidity(`Doesn't match the password`); //apply password miss match validation message
-            let children = passTwo.parentElement.children[0].childNodes; 
-            children.forEach(child => { //upon re-entering a different password change confirm icon green to red
-              if (child.nodeType !== Node.TEXT_NODE) { 
-                if(child.getAttribute('style').includes('fill: rgb(31, 52, 21);')) { 
-                    child.style.fill = 'rgb(52, 26, 21)'; 
-                }
-                if(child.getAttribute('style').includes('fill: rgb(141, 192, 116);')) { 
-                    child.style.fill = 'rgb(192, 129, 116)'; 
-                }
-                if(child.getAttribute('style').includes('stroke: rgb(31, 52, 21);')) { 
-                    child.style.stroke = 'rgb(52, 26, 21)'; 
-                }
-                if(child.getAttribute('style').includes('stroke: rgb(141, 192, 116);')) { 
-                    child.style.stroke = 'rgb(192, 129, 116)'; 
-                }
-              }
-            });
+            styleIconRed(passTwo);
           }
           else if (passOne.value === passTwo.value && passTwo.value !== '') { //remove invalid styling from confirmation input when first password is changed and then reverted back
             passTwo.classList.add('valid');
             passTwo.classList.remove('invalid');
             let children = passTwo.parentElement.children[0].childNodes; 
-            children.forEach(child => { //entering confirm before pass styles icon red, adding same password would't color would remain red, not it turns green
+            children.forEach(child => { //entering confirm before pass styles icon red, adding same password would keep it red, now it turns green
               if (child.nodeType !== Node.TEXT_NODE) { 
                 if(child.getAttribute('style').includes('fill: rgb(52, 26, 21);')) { // rgb(31, 52, 21);
                     child.style.fill = 'rgb(31, 52, 21)'; 
@@ -242,23 +245,9 @@ inputs.forEach((input) => {
 
 submitBtn.addEventListener('click', (e) => { //on 'create account' button click
   inputs.forEach((input) => { 
-    let children = input.parentElement.children[0].childNodes; //[f] turn into a function; avoid children[0] and target by element ('svg')-> refactoring screenshot
-    children.forEach(child => { //loops through NodeList: <circle>; <line>; <path> etc.
-      if (child.nodeType !== Node.TEXT_NODE) { //if child isn't a text node and contains fill or stroke color, changes it to opposite
-        if(!input.classList.contains('valid') && child.getAttribute('style').includes('fill: rgb(31, 52, 21);')) { //if has dark green fill
-            child.style.fill = 'rgb(52, 26, 21)'; // change to dark red
-        }
-        if(!input.classList.contains('valid') && child.getAttribute('style').includes('fill: rgb(141, 192, 116);')) { // if has light-green fill
-            child.style.fill = 'rgb(192, 129, 116)'; //change to light red
-        }
-        if(!input.classList.contains('valid') && child.getAttribute('style').includes('stroke: rgb(31, 52, 21);')) { // if has dark-green fill
-            child.style.stroke = 'rgb(52, 26, 21)'; // change to dark red
-        }
-        if(!input.classList.contains('valid') && child.getAttribute('style').includes('stroke: rgb(141, 192, 116);')) { // if has light-green fill
-            child.style.stroke = 'rgb(192, 129, 116)'; //change to light red
-        }
-      }
-    });
+    if(!input.classList.contains('valid')) {
+      styleIconRed(input);
+    }
     
     if(!input.classList.contains('valid') || input.value === '') { //assigns validation message to empty or invalid inputs
       switch(input.name) { //[r] put inside submitBtn click event; [f] turn into a function!
@@ -312,23 +301,7 @@ inputs.forEach((input) => { //loops through <input>s attaching 'input' event lis
         }
       });
     } else if (!input.classList.contains('valid')) { //checks if <input> field is valid against regex pattern
-        let children = input.parentElement.children[0].childNodes; //[f] turn into a function; avoid children[0] and target by element ('svg')-> refactoring screenshot
-          children.forEach(child => { //loops through NodeList: <circle>; <line>; <path> etc.
-          if (child.nodeType !== Node.TEXT_NODE) { //if child isn't a text node and contains fill or stroke color change input color to red
-            if(child.getAttribute('style').includes('fill: rgb(31, 52, 21);')) { //if has dark green fill
-                child.style.fill = 'rgb(52, 26, 21)'; // change to dark red
-            }
-            if(child.getAttribute('style').includes('fill: rgb(141, 192, 116);')) { // if has light-green fill
-                child.style.fill = 'rgb(192, 129, 116)'; //change to light red
-            }
-            if(child.getAttribute('style').includes('stroke: rgb(31, 52, 21);')) { // if has dark-green fill
-                child.style.stroke = 'rgb(52, 26, 21)'; // change to dark red
-            }
-            if(child.getAttribute('style').includes('stroke: rgb(141, 192, 116);')) { // if has light-green fill
-                child.style.stroke = 'rgb(192, 129, 116)'; //change to light red
-            }
-          }
-        });
+      styleIconRed(input);
     }
   });
 });
