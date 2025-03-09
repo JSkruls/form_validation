@@ -50,7 +50,7 @@ eyeIcon.addEventListener('click', (e) => {
 
 
 function styleIconRed(input) {
-  let children = input.parentElement.children[0].childNodes; 
+  let children = input.parentElement.children[0].childNodes; //[F] use html-collection converted to array and .map()
   children.forEach(child => { //upon re-entering a different password change confirm icon green to red
     if (child.nodeType !== Node.TEXT_NODE) { 
       if(child.getAttribute('style').includes('fill: rgb(31, 52, 21);')) { 

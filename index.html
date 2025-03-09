@@ -14,15 +14,17 @@
         <section class="hero_wrap">
           <img id="hero-img" src="images/hero_image.jpeg" alt="An image of jungle with neon lights">
           <h1>We've been waiting for you.</h1>
-          <button id="back-btn"><a href="#">Back to site <img src="images/Arrow.png" alt="Image of an arrow pointing right"><img></a></button>
+          <button id="back-btn"><a href="#">Back to site <img id="arrow" src="images/Arrow.png" alt="Image of an arrow pointing right"><img></a></button>
           <p class="copyright">Photo by Sataphorn Srijantra at <a href="https://www.rawpixel.com/image/13602653/tropical-outdoors-nature-jungle">rawpixel.com</a></p>
         </section>
+
         <section class="form_wrap">
-            <header>
-              <h1>Create an account</h1>
-              <p class="log-in">Already have an account? <a href="#">Log in</a></p>
-            </header>
-           <form action="#" method="post">
+          <header>
+            <h1>Create an account</h1>
+            <p class="log-in">Already have an account? <a href="#">Log in</a></p>
+          </header>
+
+          <form action="#" method="post">
             <div class="input_row">
               <label for="first_name" hidden>Name:</label>
               <div class="input_wrap">
@@ -35,6 +37,7 @@
                 </svg>
                 <input type="text" id="first_name" name="first_name" placeholder="Name" maxlength="20" autocomplete="off" required>
               </div>
+
               <label for="surname" hidden>Surname:</label>
               <div class="input_wrap">
                 <?xml version="1.0" encoding="UTF-8"?>
@@ -61,6 +64,7 @@
                 </svg>
                 <input type="email" id="email" name="email" placeholder="Email" maxlength="30" autocomplete="off" required>
               </div>
+
               <label for="phone" hidden>Phone:</label>
               <div class="input_wrap">
                 <?xml version="1.0" encoding="UTF-8"?>
@@ -75,6 +79,7 @@
                 <input type="tel" id="phone" name="phone" placeholder="+371 0000000" autocomplete="off" required>
               </div>
             </div>
+
             <div class="input_row" style="position: relative;">
               <label for="password" hidden>Password:</label>
               <div class="input_wrap">
@@ -93,6 +98,7 @@
                   <hr class="bar four" style="border-bottom-right-radius: 5px;" aria-hidden="true">
                 </div>
               </div>
+
               <i class="fa fa-eye-slash" id="togglePassword"></i>
               <label for="password" hidden>Repeat password:</label>
               <div class="input_wrap">
@@ -107,13 +113,16 @@
               </div>
               <p class="hint">Small letters, capitals, symbols and numbers</p>
             </div>
-            <div class="input_row checkbox">
+
+            <div class="input_row checkbox"> <!-- CHECKBOX -->
               <input type="checkbox" id="terms" name="terms" required>
               <p class="terms">I agree to the <a href="#">Terms &amp Conditions</a></p>
             </div>
-            <button type="submit" id="submit">Create account</button>
+            
+            <button type="submit" id="submit">Create account</button> <!-- CREATE ACCOUNT -->
           </form>
-          <div class="alt_login_wrap"> 
+
+          <div class="alt_login_wrap"> <!-- LOGIN -->
             <hr aria-hidden="true">
             <h2>Or register</h2>
           </div>

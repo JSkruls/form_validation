@@ -38,6 +38,7 @@
   --input-height: calc(1.2rem + 1.4vw);
 }
 
+/* GLOBAL */
 html {
   min-height: 100%;
   background: linear-gradient(0deg, rgba(141, 192, 116, .5), rgba(141, 192, 116, .5)), url(images/background_image.jpeg);
@@ -61,15 +62,25 @@ main {
   filter: drop-shadow(0px 3px 12px rgba(0, 0, 0, .6));
   display: flex;
 }
+
+*:focus {
+  outline: 1px solid rgba(113, 183, 46, 1);
+  box-shadow: inset 0px 0px 10px 1px rgba(0,0,0,0.25);
+}
+
+button {
+  cursor: pointer;
+}
+
+button:active {
+  outline: 1px solid rgba(113, 183, 46, 1)!important;
+  box-shadow: inset 0px 0px 10px 1px rgba(0,0,0,0.25);
+}
+
+/* HERO SECTION */
 .hero_wrap {
   height: 80vh;
   position: relative;
-}
-
-.form_wrap {
-  font-family: "FuturaPTLight", sans-serif;
-  width: 100%;
-  margin: 0 2rem 0 3rem;
 }
 
 #hero-img {
@@ -89,13 +100,6 @@ main {
   left: calc(30.5% + 0.8vw);
 }
 
-.form_wrap h1 {
-  letter-spacing: 1px;
-  font-size: calc(.5rem + 2vw);
-  margin-top: calc(2rem + 1.5vw);
-  margin-bottom: 0;
-}
-
 #back-btn {
   background: var(--back-btn-bg);
   color: rgba(255, 255, 255, 1);
@@ -110,14 +114,47 @@ main {
   left: 0;
   bottom: 8%;
 }
- 
+
 #back-btn a {
   text-decoration: none;
   color: rgba(255, 255, 255, 1);
 }
 
-a img {
+#back-btn > a:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+#arrow {
   width: 10px;
+  margin-right: 12px;
+}
+
+.copyright {
+  font-size: 0.7rem;
+  font-family: "FuturaPTLight", sans-serif;
+  color: rgba(255, 255, 255, 1);
+  width: fit-content;
+  position: absolute;
+  margin: 0 auto;
+  right: 0;
+  left: 0;
+  bottom: 2%;
+}
+
+/* FORM SECTION */
+.form_wrap {
+  font-family: "FuturaPTLight", sans-serif;
+  width: 100%;
+  margin: 0 2rem 0 3rem;
+}
+
+/* HEADER */
+.form_wrap h1 {
+  letter-spacing: 1px;
+  font-size: calc(.5rem + 2vw);
+  margin-top: calc(2rem + 1.5vw);
+  margin-bottom: 0;
 }
 
 .log-in {
@@ -130,6 +167,7 @@ a {
   color: var(--action-btn-bg);
 }
 
+/* FORM */
 form {
   display: flex;
   flex-direction: column;
@@ -142,78 +180,6 @@ form {
   justify-content: space-between;
   align-items: center;
   column-gap: 1.5rem;
-}
-
-.checkbox {
-  justify-content: start;
-  column-gap: 0.5rem;
-  margin-top: -1rem;
-}
-
-.input_wrap > input {
-  height: var(--input-height);
-  background-color: var(--input-bg);
-  border-style: none;
-  border-radius: 5px;
-  color: rgba(255, 255, 255, 1);
-  padding-left: 30px;
-  flex-grow: 1;
-  font-weight: 700;
-  width: 100%;
-}
-
-input::placeholder {
-  color: rgba(179, 179, 179, 1);
-  letter-spacing: normal;
-}
-
-*:focus {
-  outline: 1px solid rgba(113, 183, 46, 1);
-  box-shadow: inset 0px 0px 10px 1px rgba(0,0,0,0.25);
-}
-#back-btn > a:focus {
-  outline: none;
-  box-shadow: none;
-}
-
-input#terms:focus {
-  box-shadow: none;
-}
-
-input#terms {
-  -webkit-appearance: none; 
-  appearance: none; /* Removes default styles and allows pseudo elements */
-  background-color: rgba(255, 255, 255, 1); /* For iOS < 15 to remove gradient background */
-  margin: 0; /* Not removed via appearance */
-  display: grid;
-  place-content: center; /* Centers the check mark*/
-  border-radius: 2px;
-  width: 15px;
-  height: 15px;
-}
-button {
-  cursor: pointer;
-}
-button:active {
-  outline: 1px solid rgba(113, 183, 46, 1)!important;
-  box-shadow: inset 0px 0px 10px 1px rgba(0,0,0,0.25);
-}
-
-input#terms::before {
-  content: '';
-  width: 0.65em;
-  height: 0.65em;
-  transform: scale(0);
-  transform-origin: bottom left; /* Leave animation */
-  transition: 300ms transform ease-in-out;
-  box-shadow: inset .5em .5em rgba(0, 0, 0, 1);
-  clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
-}
-
-input#terms:checked::before {
-  transform: scale(1);
-  transform-origin: bottom left; /* Enter animation */
-  clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
 }
 
 .input_wrap {
@@ -240,11 +206,143 @@ svg#name {
   width: 14px;
 }
 
+.input_wrap > input {
+  height: var(--input-height);
+  background-color: var(--input-bg);
+  border-style: none;
+  border-radius: 5px;
+  color: rgba(255, 255, 255, 1);
+  padding-left: 30px;
+  flex-grow: 1;
+  font-weight: 700;
+  width: 100%;
+}
+
+input::placeholder {
+  color: rgba(179, 179, 179, 1);
+  letter-spacing: normal;
+}
+
+input.valid {
+  outline: 1px solid var(--valid-input-border);
+  background:url(images/valid.svg) no-repeat right;
+  background-size: 6%;
+  background-position: 95% 50%;
+  background-color: var(--input-bg);
+}
+
+input.invalid {
+  outline: 1px solid var(--invalid-input-border);
+  background:url(images/invalid.svg) no-repeat right;
+  background-size: 6%;
+  background-position: 95% 50%;
+  background-color: var(--invalid-input-bg);
+}
+
+/* PASSWORD */
+input[type='password'] {
+  letter-spacing: -5px;
+}
+
+.progress_bar_wrap {
+  width: 100%;
+  height: 10%;
+  position: absolute;
+  bottom: 0;
+  display: flex;
+  column-gap: 2px;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  visibility: hidden;
+}
+
+hr.bar {
+  flex-grow: 1;
+  background: rgb(147, 147, 147);
+  height: 4px;
+  border: none;
+  box-shadow: 5px -12px 2px -10px rgba(0, 0, 0, 0.40) inset;
+}
+
+hr.four {
+  box-shadow: 5px -12px 2px -10px rgba(0, 0, 0, 0.40) inset;
+}
+
+.hint {
+  font-size: calc(0.7rem + .1vw);
+  color: var(--invalid-input-border);
+  display: inline;
+  position: absolute;
+  top: calc(75% + .1vh);
+  left: .5%;
+  visibility: hidden;
+}
+
+/* VISIBILITY TOGGLE */
+.fa { /* styles both visible and hidden password icons */
+  position: absolute;
+  bottom: calc(50% - 5px);
+  left: calc(49.7% - 5px);
+  font-size: 10px;
+  color: var(--placeholder-text);
+}
+.fa-eye::before { 
+  content:'\f06e'; /* visible password icon */
+  position: absolute; /* otherwise icon is slightly to the left */
+  top: -10px;
+  right: -12px;
+}
+
+.fa-eye-slash::before {
+  content:'\f070'; /* hidden password icon */
+}
+
+ /* CHECKBOX */
+.checkbox {
+  justify-content: start;
+  column-gap: 0.5rem;
+  margin-top: -1rem;
+}
+
+input#terms {
+  -webkit-appearance: none; 
+  appearance: none; /* Removes default styles and allows pseudo elements */
+  background-color: rgba(255, 255, 255, 1); /* For iOS < 15 to remove gradient background */
+  margin: 0; /* Not removed via appearance */
+  display: grid;
+  place-content: center; /* Centers the check mark*/
+  border-radius: 2px;
+  width: 15px;
+  height: 15px;
+}
+
+input#terms::before {
+  content: '';
+  width: 0.65em;
+  height: 0.65em;
+  transform: scale(0);
+  transform-origin: bottom left; /* Leave animation */
+  transition: 300ms transform ease-in-out;
+  box-shadow: inset .5em .5em rgba(0, 0, 0, 1);
+  clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+}
+
+input#terms:checked::before {
+  transform: scale(1);
+  transform-origin: bottom left; /* Enter animation */
+  clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+}
+
+input#terms:focus {
+  box-shadow: none;
+}
+
 p.terms {
   font-size: calc(.2rem + .8vw);
   color: rgba(179, 179, 179, 1);
 }
 
+/* CREATE ACCOUNT */
 #submit {
   background-color: var(--action-btn-bg);
   border: none;
@@ -253,7 +351,7 @@ p.terms {
   color: rgb(255, 255, 255);
 }
 
-
+/* LOGIN */
 hr { 
   border: .1px solid rgba(204, 204, 204, 0.7);
   width: 100%;
@@ -301,94 +399,4 @@ hr {
 
 button > img {
   height: 22px;
-}
-
-input.valid,
-input:-webkit-autofill,
-input:-webkit-autofill:focus {
-  outline: 1px solid var(--valid-input-border);
-  background:url(images/valid.svg) no-repeat right;
-  background-size: 6%;
-  background-position: 95% 50%;
-  background-color: var(--input-bg);
-}
-
-input.invalid {
-  outline: 1px solid var(--invalid-input-border);
-  background:url(images/invalid.svg) no-repeat right;
-  background-size: 6%;
-  background-position: 95% 50%;
-  background-color: var(--invalid-input-bg);
-}
-
-input:-webkit-autofill,
-input:-webkit-autofill:focus {
-    /* removes/postpones browser autofill styling */
-    transition: background-color 0s 60000s, color 0s 60000s !important;
-  }
-
-input[type='password'] {
-  letter-spacing: -5px;
-}
-
-.progress_bar_wrap {
-  width: 100%;
-  height: 10%;
-  position: absolute;
-  bottom: 0;
-  display: flex;
-  column-gap: 2px;
-  border-bottom-left-radius: 5px;
-  border-bottom-right-radius: 5px;
-  visibility: hidden;
-}
-hr.bar {
-  flex-grow: 1;
-  background: rgb(147, 147, 147);
-  height: 4px;
-  border: none;
-  box-shadow: 5px -12px 2px -10px rgba(0, 0, 0, 0.40) inset;
-}
-
-hr.four {
-  box-shadow: 5px -12px 2px -10px rgba(0, 0, 0, 0.40) inset;
-}
-
-.copyright {
-  font-size: 0.7rem;
-  font-family: "FuturaPTLight", sans-serif;
-  color: rgba(255, 255, 255, 1);
-  width: fit-content;
-  position: absolute;
-  margin: 0 auto;
-  right: 0;
-  left: 0;
-  bottom: 2%;
-}
-.fa { /* styles both visible and hidden password icons */
-  position: absolute;
-  bottom: calc(50% - 5px);
-  left: calc(49.7% - 5px);
-  font-size: 10px;
-  color: var(--placeholder-text);
-}
-.fa-eye::before { /* visible password icon */
-  content:'\f06e';
-  position: absolute; /* otherwise icon is slightly to the left */
-  top: -10px;
-  right: -12px;
-}
-
-.fa-eye-slash::before {
-  content:'\f070'; /* hidden password icon */
-}
-
-.hint {
-  font-size: calc(0.7rem + .1vw);
-  color: var(--invalid-input-border);
-  display: inline;
-  position: absolute;
-  top: calc(75% + .1vh);
-  left: .5%;
-  visibility: hidden;
 }
