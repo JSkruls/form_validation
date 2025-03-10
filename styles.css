@@ -196,7 +196,7 @@ svg {
   width: 15px;
 }
 
-svg#password {
+svg#password, svg#confirm {
   height: 17px;
   width: 17px;
 }
