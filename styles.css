@@ -223,7 +223,7 @@ input::placeholder {
   letter-spacing: normal;
 }
 
-input.valid {
+input:valid {
   outline: 1px solid var(--valid-input-border);
   background:url(images/valid.svg) no-repeat right;
   background-size: 6%;
@@ -399,4 +399,14 @@ hr {
 
 button > img {
   height: 22px;
+}
+
+/* ----------- */
+
+input:valid {
+  outline: 1px solid green;
+}
+
+input:invalid {
+  outline: 1px solid red;
 }
