@@ -64,7 +64,7 @@ main {
 }
 
 *:focus {
-  outline: 1px solid rgba(113, 183, 46, 1);
+  outline: 1px solid var(--valid-input-border);
   box-shadow: inset 0px 0px 10px 1px rgba(0,0,0,0.25);
 }
 
@@ -216,6 +216,7 @@ svg#name {
   flex-grow: 1;
   font-weight: 700;
   width: 100%;
+  transition: outline 0.2s ease-in-out;
 }
 
 input::placeholder {
@@ -223,21 +224,25 @@ input::placeholder {
   letter-spacing: normal;
 }
 
-input:valid {
+input.interacted {
+  outline: none;
+}
+
+input.interacted:valid {
   outline: 1px solid var(--valid-input-border);
   background:url(images/valid.svg) no-repeat right;
   background-size: 6%;
   background-position: 95% 50%;
   background-color: var(--input-bg);
-}
+} 
 
-input.invalid {
+input.interacted:invalid {
   outline: 1px solid var(--invalid-input-border);
   background:url(images/invalid.svg) no-repeat right;
   background-size: 6%;
   background-position: 95% 50%;
   background-color: var(--invalid-input-bg);
-}
+} 
 
 /* PASSWORD */
 input[type='password'] {
@@ -401,12 +406,8 @@ button > img {
   height: 22px;
 }
 
-/* ----------- */
+/* REFACTORING */
 
-input:valid {
-  outline: 1px solid green;
-}
 
-input:invalid {
-  outline: 1px solid red;
-}
+
+
