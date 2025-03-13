@@ -45,50 +45,15 @@ inputs.forEach((input) => {
   });
 });
 
-//Add 'red' keys to object to switch from red back to green
-//Possibly will need separate function for styleIconGreen
+// Validity state colors for paintIcon() function
+// Turning green into red uses object's value
+// Going red into green uses object's key
 const shapeColors = {
   'rgb(31, 52, 21)': 'rgb(52, 26, 21)',
   'rgb(141, 192, 116)': 'rgb(192, 129, 116)',
   'rgb(31, 52, 21)': 'rgb(52, 26, 21)',
   'rgb(141, 192, 116)': 'rgb(192, 129, 116)',
 }
-
-// // Apply invalid colors to icon of current input field
-// function paintIconRed(input) { 
-//   let shapes = input.parentElement.children[0].childNodes; // Grab all children/shapes of svg 
-//   shapes = Array.from(shapes).filter(shape => shape.nodeType !== Node.TEXT_NODE); // Remove text nodes for .getAttribute() to work
-//   shapes.forEach(shape => { 
-//     let objectKey;
-//     if(Object.keys(shapeColors).some(key => { // Find which inline rgb() value matches object's key 
-//       objectKey = key; // Stores inline rgb() value to be changed
-//       return shape.getAttribute('style').includes(key); 
-//     })) { 
-//       shape.setAttribute("style", // Change inline color for one inside object
-//         shape.getAttribute("style").replace(/rgb\(\s*\d+,\s*\d+,\s*\d+\s*\)/, 
-//         shapeColors[objectKey]));
-//       }
-//   });
-// }
-
-// // Apply valid colors to icon of current input field
-// function paintIconGreen(input) { 
-//   let shapes = input.parentElement.children[0].childNodes; // Grab all children/shapes of svg 
-//   shapes = Array.from(shapes).filter(shape => shape.nodeType !== Node.TEXT_NODE); // Remove text nodes for .getAttribute() to work
-//   shapes.forEach(shape => { 
-//     let objectValue; 
-//     let objectKey;
-//     if(Object.values(shapeColors).some(value => { // Find which inline rgb() value matches object's value 
-//       objectValue = value; // Stores inline rgb() value to be changed
-//       return shape.getAttribute('style').includes(value); 
-//     })) { 
-//       objectKey = Object.entries(shapeColors).find(([key, value]) => value === objectValue)[0]; // Find which key matches object's value
-//       shape.setAttribute("style", // Change inline color for one inside object
-//         shape.getAttribute("style").replace(/rgb\(\s*\d+,\s*\d+,\s*\d+\s*\)/, 
-//         objectKey));
-//       }
-//   });
-// }
 
 // Apply invalid colors to icon of current input field
 function paintIcon(input) { 
@@ -106,7 +71,7 @@ function paintIcon(input) {
         shape.getAttribute("style").replace(/rgb\(\s*\d+,\s*\d+,\s*\d+\s*\)/, 
         shapeColors[objectKey]));
       }
-      
+
     // If input invalid paint icon red to green
     if(Object.values(shapeColors).some(value => { // Find which inline rgb() value matches object's value 
       objectValue = value; // Store inline rgb() value to be changed
