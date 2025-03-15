@@ -5,8 +5,9 @@ const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/; //email validation patter
 const phoneRegex = /^(\+)?(\d{3})?\d{8}$/; //phone validation pattern
 const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\W])[A-Za-z\d\W]{4,10}$/; //password validation pattern
 const password = document.querySelector('input[name="password"]'); //password input
-const passTwo = document.querySelector('input[name="confirm"]'); //password confirmation input
+const confirmation = document.querySelector('input[name="confirm"]'); //password confirmation input
 const passwordBars = document.querySelectorAll('.bar');
+const eyeIcon = document.getElementById('togglePassword'); // Show/Hide password field input
 
 // List of error msgs for each input type/name
 const invalidityMessages = { 
@@ -132,3 +133,20 @@ function paintPasswordBars(password) {
     passwordBars.item(i).style.backgroundColor = passwordColors[colorIndex];
   }
 }
+
+// Reveal / hide password field input
+eyeIcon.addEventListener('click', (e) => {
+  if(password.type === 'password') {
+     password.type = 'text';
+     confirmation.type = 'text';
+     eyeIcon.classList.remove('fa-eye-slash');
+     eyeIcon.classList.add('fa-eye');
+  }
+  else if (password.type === 'text') {
+    password.type = 'password';
+    confirmation.type = 'password';
+    eyeIcon.classList.remove('fa-eye');
+    eyeIcon.classList.add('fa-eye-slash');
+  }
+});
+
