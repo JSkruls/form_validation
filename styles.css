@@ -210,7 +210,7 @@ svg#name {
   height: var(--input-height);
   background-color: var(--input-bg);
   border-style: none;
-  border-radius: 5px;
+  border-radius: 4px;
   color: rgba(255, 255, 255, 1);
   padding-left: 30px;
   flex-grow: 1;
@@ -258,7 +258,6 @@ input[type='password'] {
   column-gap: 2px;
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
-  visibility: hidden;
 }
 
 hr.bar {
@@ -267,6 +266,7 @@ hr.bar {
   height: 4px;
   border: none;
   box-shadow: 5px -12px 2px -10px rgba(0, 0, 0, 0.40) inset;
+  visibility: hidden;
 }
 
 hr.four {
@@ -351,7 +351,7 @@ p.terms {
 #submit {
   background-color: var(--action-btn-bg);
   border: none;
-  border-radius: 5px;
+  border-radius: 4px;
   padding: 8px 0;
   color: rgb(255, 255, 255);
 }
@@ -394,7 +394,7 @@ hr {
   column-gap: 5px;
   background-color: var(--input-bg);
   outline: 1px solid var(--input-border);
-  border-radius: 5px;
+  border-radius: 4px;
   border-style: none;
   flex-grow: 1;
   width: 100%;
