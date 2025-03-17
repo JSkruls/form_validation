@@ -1,9 +1,5 @@
 const inputs = document.querySelectorAll('.validate'); 
 const submit = document.querySelector('#submit');
-const nameRegex = /^[a-zA-Z]+$/; //name and surname validation pattern
-const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/; //email validation pattern
-const phoneRegex = /^(\+)?(\d{3})?\d{8}$/; //phone validation pattern
-const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\W])[A-Za-z\d\W]{4,10}$/; //password validation pattern
 const password = document.querySelector('input[name="password"]'); //password input
 const confirmation = document.querySelector('input[name="confirm"]'); //password confirmation input
 const passwordBars = document.querySelectorAll('.bar');
