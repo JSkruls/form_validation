@@ -1,4 +1,4 @@
-const inputs = document.querySelectorAll('input'); 
+const inputs = document.querySelectorAll('.validate'); 
 const submit = document.querySelector('#submit');
 const nameRegex = /^[a-zA-Z]+$/; //name and surname validation pattern
 const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/; //email validation pattern
@@ -31,6 +31,13 @@ inputs.forEach((input) => {
   });
 });
 
+confirmation.addEventListener('input', (e) => {
+  confirmation.setCustomValidity(''); // Reset validation error & invalidity state 
+  if(!confirmation.checkValidity()) {
+    confirmation.setCustomValidity(invalidityMessages['confirm']); // Set error message as per object
+  } 
+});
+
 // Check validity and set error msgs on from submit
 submit.addEventListener('click', (e) => {
   inputs.forEach((input) => {
@@ -38,6 +45,16 @@ submit.addEventListener('click', (e) => {
       input.setCustomValidity(invalidityMessages[input.name]); 
     }
   });
+});
+
+// Check validity and set error msg for confirmation field
+submit.addEventListener('click', (e) => {
+  confirmation.setCustomValidity('');
+  if(!confirmation.checkValidity() && (confirmation.value !== password.value) ||
+    confirmation.checkValidity() && (confirmation.value !== password.value)) {
+    confirmation.setCustomValidity(invalidityMessages['confirm']);
+    console.log('checking pass and confirm equality');
+  }
 });
 
 // Avoid input validity styling on page load
@@ -59,14 +76,15 @@ const shapeColors = {
   'rgb(141, 192, 116)': 'rgb(192, 129, 116)',
 }
 
-// Apply invalid colors to icon of current input field
+// Apply colors to icon of current input field
 function paintIcon(input) { 
   let shapes = input.parentElement.children[0].childNodes; // Grab all children/shapes of svg 
   shapes = Array.from(shapes).filter(shape => shape.nodeType !== Node.TEXT_NODE); // Remove text nodes for .getAttribute() to work
   shapes.forEach(shape => { 
     let objectValue; 
     let objectKey;
-    // If input invalid paint icon green to red
+
+    // If valid to invalid paint icon green to red
     if(Object.keys(shapeColors).some(key => { // Find which inline rgb() value matches object's key 
       objectKey = key; // Store inline rgb() value to be changed
       return shape.getAttribute('style').includes(key) && !input.checkValidity(); 
@@ -76,7 +94,7 @@ function paintIcon(input) {
         shapeColors[objectKey]));
       }
 
-    // If input invalid paint icon red to green
+    // If invalid to valid paint icon red to green
     if(Object.values(shapeColors).some(value => { // Find which inline rgb() value matches object's value 
       objectValue = value; // Store inline rgb() value to be changed
       return shape.getAttribute('style').includes(value) && input.checkValidity(); 
@@ -150,3 +168,85 @@ eyeIcon.addEventListener('click', (e) => {
   }
 });
 
+// Apply icon colors to confirmation on mismatch with password
+document.body.addEventListener('input', handleEvent);
+  function handleEvent(event) {
+  if(event.target.id === 'confirm' || event.target.id === 'password') {
+  // Paint invalid if entering confirmation input before password(empty)
+  if(confirmation.value !== password.value && !password.value) {
+    confirmation.classList.remove('valid');
+    confirmation.classList.add('invalid');
+  }
+  // Paint invalid if confirmation doesn't match password(filled)
+  else if(confirmation.value !== password.value && password.value) {
+    confirmation.classList.remove('valid');
+    confirmation.classList.add('invalid');
+  }
+  // Paint valid if confirmation matches password(filled)
+  else if(confirmation.value === password.value && password.value) {
+    confirmation.classList.remove('invalid');
+    confirmation.classList.add('valid');
+  }
+
+  let shapes = confirmation.parentElement.children[0].childNodes; 
+  shapes = Array.from(shapes).filter(shape => shape.nodeType !== Node.TEXT_NODE);
+  shapes.forEach(shape => { 
+    let objectValue; 
+    let objectKey;
+    
+    // If valid to invalid paint icon green to red 
+    if((Object.keys(shapeColors).some(key => { // Find which inline rgb() value matches object's key 
+      objectKey = key; // Store inline rgb() value to be changed
+      return shape.getAttribute('style').includes(key); 
+    })) && confirmation.value !== password.value) { 
+      shape.setAttribute("style", // Change inline color for one inside object
+        shape.getAttribute("style").replace(/rgb\(\s*\d+,\s*\d+,\s*\d+\s*\)/, 
+        shapeColors[objectKey]));
+    }
+
+    // If invalid to valid paint icon red to green 
+    if((Object.values(shapeColors).some(value => { // Find which inline rgb() value matches object's value 
+      objectValue = value; // Store inline rgb() value to be changed
+      return shape.getAttribute('style').includes(value) ; 
+    })) && confirmation.value === password.value && password.value) { 
+      objectKey = Object.entries(shapeColors).find(([key, value]) => value === objectValue)[0]; // Find which key matches object's value
+      shape.setAttribute("style", // Change inline color for one inside object
+        shape.getAttribute("style").replace(/rgb\(\s*\d+,\s*\d+,\s*\d+\s*\)/, 
+        objectKey));
+    }
+  });
+  }
+};
+
+// Apply icon colors to confirmation on focus
+confirmation.addEventListener('focus', (e) => {
+  confirmation.classList.add('invalid'); // Add invalid border and exclamation icon
+  // Override with valid styling when password is valid and both equal
+  if(password.value === confirmation.value && password.checkValidity()) { 
+    confirmation.classList.remove('invalid');
+    confirmation.classList.add('valid');
+  }
+
+  // Paint invalid styling to the left icon
+  let shapes = confirmation.parentElement.children[0].childNodes; 
+  shapes = Array.from(shapes).filter(shape => shape.nodeType !== Node.TEXT_NODE);
+  shapes.forEach(shape => { 
+    let objectValue; 
+    let objectKey;
+    
+    // If valid to invalid paint icon green to red 
+    if((Object.keys(shapeColors).some(key => { // Find which inline rgb() value matches object's key 
+      objectKey = key; // Store inline rgb() value to be changed
+      return shape.getAttribute('style').includes(key); 
+    })) && confirmation.value === password.value && !password.checkValidity()) { // Turn red when both are empty or don't pass validation
+      shape.setAttribute("style", // Change inline color for one inside object
+        shape.getAttribute("style").replace(/rgb\(\s*\d+,\s*\d+,\s*\d+\s*\)/, 
+        shapeColors[objectKey]));
+    }
+  });
+});
+
+
+// Add password hint (with timeout?)
+// Re-work email regex pattern
+// What i've learned : adding one eventlistener to multiple elements; adding multiple event listeners to multiple elements

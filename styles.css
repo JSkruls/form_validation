@@ -244,6 +244,22 @@ input.interacted:invalid {
   background-color: var(--invalid-input-bg);
 } 
 
+input.valid { /* use !important to override :invalid */
+  outline: 1px solid var(--valid-input-border);
+  background:url(images/valid.svg) no-repeat right;
+  background-size: 6%;
+  background-position: 95% 50%;
+  background-color: var(--input-bg);
+} 
+
+input.invalid { /* use !important to override :invalid */
+  outline: 1px solid var(--invalid-input-border) !important;
+  background:url(images/invalid.svg) no-repeat right !important;
+  background-size: 6% !important;
+  background-position: 95% 50% !important;
+  background-color: var(--invalid-input-bg) !important;
+} 
+
 /* PASSWORD */
 input[type='password'] {
   letter-spacing: -5px;
