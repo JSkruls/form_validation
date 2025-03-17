@@ -4,6 +4,7 @@ const password = document.querySelector('input[name="password"]'); //password in
 const confirmation = document.querySelector('input[name="confirm"]'); //password confirmation input
 const passwordBars = document.querySelectorAll('.bar');
 const eyeIcon = document.getElementById('togglePassword'); // Show/Hide password field input
+const hint = document.querySelector('.hint');
 
 // List of error msgs for each input type/name
 const invalidityMessages = { 
@@ -242,7 +243,17 @@ confirmation.addEventListener('focus', (e) => {
   });
 });
 
+// Hide password hint
+password.addEventListener('input', (e) => {
+  setTimeout(() => {
+    if(password.checkValidity()) {
+      hint.style.opacity = 0;
+    }
+    else {
+      hint.style.opacity = 1;
+    }
+  }, 250);
+});
 
-// Add password hint (with timeout?)
-// Re-work email regex pattern
+
 // What i've learned : adding one eventlistener to multiple elements; adding multiple event listeners to multiple elements

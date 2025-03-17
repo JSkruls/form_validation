@@ -296,7 +296,8 @@ hr.four {
   position: absolute;
   top: calc(75% + .1vh);
   left: .5%;
-  visibility: hidden;
+  transition: opacity 0.1s ease-in-out;
+  opacity: 0;
 }
 
 /* VISIBILITY TOGGLE */
@@ -422,7 +423,6 @@ button > img {
   height: 22px;
 }
 
-/* REFACTORING */
 
 
 
