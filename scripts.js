@@ -255,5 +255,3 @@ password.addEventListener('input', (e) => {
   }, 250);
 });
 
-
-// What i've learned : adding one eventlistener to multiple elements; adding multiple event listeners to multiple elements
